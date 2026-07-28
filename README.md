@@ -163,6 +163,37 @@ _Sensors available if you have a Zonneplan charge point/laadpaal_
 - Charge point dynamic charging flex suppressed `on/off` _(default disabled)_
 - Charge on solar enabled `on/off`
 - Buttons to start/stop charge
+- Charge planning: desired end time, desired kilometers, desired percentage, car and the apply/discard buttons
+
+#### Planning a charge session
+
+The planning controls are grouped under **Configuration** on the device page, separate from the
+start/stop buttons. Changing one of them does not contact Zonneplan: the new value is kept locally
+until you press **Apply planning**, which sends the whole planning in a single call. **Discard
+planning** throws the local changes away and puts the fields back to what Zonneplan currently has.
+Both buttons are only available while there is something to apply or discard.
+
+A session can be planned by distance or by percentage, but not both, so filling in one greys out
+the other until you apply or discard.
+
+Fields you have not changed keep following Zonneplan: when a planned session expires the fields
+empty themselves, and when you change the planning in the Zonneplan app the fields update along
+with it.
+
+The device page sorts entities alphabetically, so add them to a dashboard to get them in a usable
+order (replace `<charge_point>` with your own entity id prefix):
+
+```yaml
+type: entities
+title: Charge planning
+entities:
+  - select.<charge_point>_charge_point_vehicle
+  - datetime.<charge_point>_charge_point_dynamic_load_desired_end_time
+  - number.<charge_point>_desired_kilometers
+  - number.<charge_point>_desired_percentage
+  - button.<charge_point>_apply_planning
+  - button.<charge_point>_discard_planning
+```
 
 ### Zonneplan Battery
 _Sensors available if you have a Zonneplan Nexus battery_

@@ -23,6 +23,7 @@ from homeassistant.components.sensor import (
 )
 from homeassistant.const import (
     CURRENCY_EURO,
+    EntityCategory,
     UnitOfEnergy,
     UnitOfLength,
     UnitOfPower,
@@ -1065,7 +1066,7 @@ SENSOR_TYPES: dict[
         "backup_power_usable_capacity_wh": ZonneplanSensorEntityDescription(
             key="contracts.{install_index}.meta.backup_power_usable_capacity_wh",
             name="Backup power usable capacity",
-            translation_key="battery_cycles",
+            translation_key="backup_power_usable_capacity_wh",
             native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
             device_class=SensorDeviceClass.ENERGY,
         ),
@@ -1640,12 +1641,14 @@ BUTTON_TYPES: dict[str, dict[str, ZonneplanButtonEntityDescription]] = {
             name="Apply planning",
             translation_key="apply_dynamic_charge",
             icon="mdi:calendar-check",
+            entity_category=EntityCategory.CONFIG,
         ),
         "discard_dynamic_charge": ZonneplanButtonEntityDescription(
             key="charge_point.discard_dynamic_charge",
             name="Discard planning",
             translation_key="discard_dynamic_charge",
             icon="mdi:calendar-remove",
+            entity_category=EntityCategory.CONFIG,
         ),
     },
 }
@@ -1691,6 +1694,7 @@ NUMBER_TYPES: dict[str, dict[str, ZonneplanNumberEntityDescription]] = {
             native_max_value=100,
             native_min_value=5,
             value_factor=0.1,
+            entity_category=EntityCategory.CONFIG,
         ),
         "dynamic_charging_user_constraints.desired_distance_in_kilometers": ZonneplanNumberEntityDescription(
             key="state.dynamic_charging_user_constraints.desired_distance_in_kilometers",
@@ -1700,6 +1704,7 @@ NUMBER_TYPES: dict[str, dict[str, ZonneplanNumberEntityDescription]] = {
             native_unit_of_measurement=UnitOfLength.KILOMETERS,
             entity_registry_enabled_default=True,
             native_max_value=500,  # will be updated later to match the vehicle
+            entity_category=EntityCategory.CONFIG,
         ),
     },
 }
@@ -1719,6 +1724,7 @@ SELECT_TYPES = {
             name="Charge point vehicle",
             translation_key="charge_point_vehicle",
             icon="mdi:car-electric",
+            entity_category=EntityCategory.CONFIG,
         )
     },
 }
@@ -1730,6 +1736,7 @@ DATETIME_TYPE = {
             name="Charge point dynamic load desired end time",
             translation_key="charge_point_dynamic_load_desired_end_time",
             entity_registry_enabled_default=True,
+            entity_category=EntityCategory.CONFIG,
         ),
     }
 }
