@@ -86,14 +86,17 @@ class ZonneplanChargePointButton(ChargePointEntity, CoordinatorEntity, ButtonEnt
 
         state = self.coordinator.get_data_value("state")
 
-        if not state or not state["connectivity_state"]:
+        if not state or not state["connectivity_state"] or "processing" in state:
             return False
 
-        if "processing" in state:
-            return False
+        if self._button_key == "apply_dynamic_charge":
+            return self.coordinator.has_pending_dynamic_charge_changes() and self.coordinator.dynamic_charge_params_are_valid()
 
-        if self._button_key == "stop" and state["state"] == "Charging":
-            return True
+        if self._button_key == "discard_dynamic_charge":
+            return self.coordinator.has_pending_dynamic_charge_changes()
+
+        if self._button_key == "stop":
+            return state["state"] == "Charging"
 
         return bool(self._button_key == "start" and state["state"] == "VehicleDetected")
 
@@ -103,5 +106,9 @@ class ZonneplanChargePointButton(ChargePointEntity, CoordinatorEntity, ButtonEnt
             await self.coordinator.async_start_charge()
         elif self._button_key == "stop":
             await self.coordinator.async_stop_charge()
+        elif self._button_key == "apply_dynamic_charge":
+            await self.coordinator.async_apply_dynamic_charge()
+        elif self._button_key == "discard_dynamic_charge":
+            self.coordinator.discard_dynamic_charge_changes()
         else:
             _LOGGER.warning("Unknown button action for %s", self._button_key)
