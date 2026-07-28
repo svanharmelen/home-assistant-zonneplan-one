@@ -546,8 +546,11 @@
       "stop_charge": {
         "name": "Stop laden"
       },
-      "dynamic_charge": {
-        "name": "Start laden (percentage)"
+      "apply_dynamic_charge": {
+        "name": "Laadplan toepassen"
+      },
+      "discard_dynamic_charge": {
+        "name": "Laadplan verwerpen"
       }
     },
     "number": {
@@ -564,7 +567,7 @@
         "name": "Gewenste afstand"
       },
       "charge_point_dynamic_desired_additional_battery_percentage": {
-        "name": "Gewenst pecentage"
+        "name": "Gewenst percentage"
       }
     },
     "datetime": {

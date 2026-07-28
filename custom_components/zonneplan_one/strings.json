@@ -399,8 +399,11 @@
       "stop_charge": {
         "name": "Stop charge"
       },
-      "dynamic_charge": {
-        "name": "Dynamic charge (percentage)"
+      "apply_dynamic_charge": {
+        "name": "Apply planning"
+      },
+      "discard_dynamic_charge": {
+        "name": "Discard planning"
       }
     },
     "number": {

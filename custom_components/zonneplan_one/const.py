@@ -1635,6 +1635,18 @@ BUTTON_TYPES: dict[str, dict[str, ZonneplanButtonEntityDescription]] = {
             name="Stop charge",
             translation_key="stop_charge",
         ),
+        "apply_dynamic_charge": ZonneplanButtonEntityDescription(
+            key="charge_point.apply_dynamic_charge",
+            name="Apply planning",
+            translation_key="apply_dynamic_charge",
+            icon="mdi:calendar-check",
+        ),
+        "discard_dynamic_charge": ZonneplanButtonEntityDescription(
+            key="charge_point.discard_dynamic_charge",
+            name="Discard planning",
+            translation_key="discard_dynamic_charge",
+            icon="mdi:calendar-remove",
+        ),
     },
 }
 
